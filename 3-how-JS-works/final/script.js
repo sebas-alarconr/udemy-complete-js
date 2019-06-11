@@ -60,10 +60,16 @@ execution stack, this happens in 2 phases.
 
   1.2) Creation of the scope chain
 
-    * Scope answers the question "Where can we access a certain variable?"
+    * Scope answers the question "Where can we access a certain variable or
+    function?"
 
     * Each new function creates a scope: Space / Environment in which the
     variables it defines are accessible.
+
+    * If, else, for, while block don't create a new scope in Javascript.
+
+    * Lexical scoping: A function that is lexically within another function gets
+    access to the scope of the outer (parent) function.
   1.3) Determine value of 'this' variable
 
 2. Execution phase
