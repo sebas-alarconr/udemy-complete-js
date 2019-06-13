@@ -38,7 +38,8 @@ When a function is called, a new execution context is put on top of the
 execution stack, this happens in 2 phases.
 
 1. Creation phase
-  1.1) Creation of the Variable Object
+  1.1) Creation of the Variable Object.
+
     * The argument 'object' is created, containing all the arguments that were
     passed into the function.
 
@@ -58,7 +59,7 @@ execution stack, this happens in 2 phases.
     execution phase.
     ============================================================================
 
-  1.2) Creation of the scope chain
+  1.2) Creation of the scope chain.
 
     * Scope answers the question "Where can we access a certain variable or
     function?"
@@ -68,18 +69,28 @@ execution stack, this happens in 2 phases.
 
     * If, else, for, while block don't create a new scope in Javascript.
 
-    * Lexical scoping: A function that is lexically within another function gets
-    access to the scope of the outer (parent) function.
-  1.3) Determine value of 'this' variable
+    * Lexical scoping: A function that is lexically within another function (a
+    function inside another function) gets access to the scope of the outer
+    (parent) function.
+
+  1.3) Determine value of 'this' variable.
+
+    * Is a variable that each and every execution context gets. And is stored in
+    the execution context object.
+
+    * Regular Function Call: points at the global object (window object in the
+    browser)
+
+    * Method call: points to the object that is calling the method.
+
+    * The this keyword is not assigned a value until a function where it is
+    defined is actually called.
 
 2. Execution phase
   The code of the function that generated the current execution context is ran
   line by line
 
 *******************************************************************************/
-
-
-
 
 /*******************************************************************************
 * Hoisting
@@ -139,3 +150,100 @@ foo();
 console.log(age);
 */
 
+/*******************************************************************************
+* Scoping
+*******************************************************************************/
+
+/*
+// Global Scope [VO global]
+var a = 'Hello';
+first();
+
+function first() {
+  //first() scope [VO 1] + [VO global]
+  var b = 'Hi!';
+  second();
+
+  function second() {
+    //second() scope [VO 2] + [VO 1] + [VO global]
+    var c = 'Hey!';
+
+    console.log(a + b + c);
+  }
+}
+*/
+
+/*
+// Execution Stack VS Scope Chain
+var a = 'Hello!';
+first();
+
+function first() {
+  // Scope: a and b. Not c nor d.
+  var b = 'Hi!';
+  second();
+
+  function second() {
+    // Scope a, b and c. Not d.
+    var c = 'Hey!';
+    third();
+  }
+}
+
+function third() {
+  var d = 'John';
+
+  // This won't work, third scope only have a and d variables.
+  // console.log(a+b+c+d);
+
+  console.log(a+d);
+}
+*/
+
+
+/*******************************************************************************
+* this keyword
+*******************************************************************************/
+/*
+// window object.
+console.log(this);
+*/
+
+/*
+// In a regular function call the this keyword always points to the window object
+function calculateAge(year) {
+  console.log(2019 - year);
+  console.log(this);
+}
+
+calculateAge(1992);
+*/
+
+/*
+var john = {
+  name: 'John',
+  yearOfBirth: 1990,
+  calculateAge: function() {
+    console.log(this);
+    console.log(2019 - this.yearOfBirth);
+
+    // Regular function call!
+    function inner() {
+      console.log(this);
+    }
+
+    inner();
+  }
+};
+
+john.calculateAge();
+
+var mike = {
+  name: 'Mike',
+  yearOfBirth: 1995
+};
+
+mike.calculateAge = john.calculateAge;
+//The this keyword is only assigned a value when the object calls the method.
+mike.calculateAge();
+*/
