@@ -339,7 +339,7 @@ var controller = (function(budgetCtrl, UICtrl) {
       currentDate = budgetCtrl.getDate();
       var localStorageBudget = JSON.parse(window.localStorage.getItem('budget'));
 
-      if (localStorageBudget.month === currentDate.month && localStorageBudget.year === currentDate.year) {
+      if (localStorageBudget && localStorageBudget.month === currentDate.month && localStorageBudget.year === currentDate.year) {
         budgetCtrl.setData(localStorageBudget);
         localStorageBudget.allItems.inc.forEach(function(income) {
           UICtrl.addListItem(income, 'inc');
