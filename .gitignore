@@ -1,2 +1,12 @@
 .DS_Store
 **/.DS_Store
+
+# packages
+**/node_modules/
+
+# dist folder
+**/dist/js/
+**/dist/index.html
+
+# env files
+**/.env
