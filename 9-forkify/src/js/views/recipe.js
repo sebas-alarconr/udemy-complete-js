@@ -1,23 +1,4 @@
-import { DOMElements } from '../utils';
-import { Fraction } from 'fractional';
-
-const formatCount = count => {
-  if (count) {
-    const [int, dec] = count.toString().split('.').map(item => Number(item));
-
-    if (!dec) return count;
-
-    if (int === 0) {
-      const fraction = new Fraction(count);
-      return `${fraction.numerator}/${fraction.denominator}`;
-    } else {
-      const fraction = new Fraction(count - int);
-      return `${int} ${fraction.numerator}/${fraction.denominator}`;
-    }
-  }
-
-  return '?';
-};
+import { DOMElements, formatCount } from '../utils';
 
 const renderIngredient = ingredient => `
   <li class="recipe__item">
@@ -32,7 +13,7 @@ const renderIngredient = ingredient => `
   </li>
 `;
 
-export const renderRecipe = recipe => {
+export const renderRecipe = (recipe, isLiked) => {
   const markup = `
     <figure class="recipe__fig">
       <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
@@ -56,12 +37,12 @@ export const renderRecipe = recipe => {
         <span class="recipe__info-text"> servings</span>
 
         <div class="recipe__info-buttons">
-          <button class="btn-tiny">
+          <button class="btn-tiny btn-decrease">
             <svg>
               <use href="img/icons.svg#icon-circle-with-minus"></use>
             </svg>
           </button>
-          <button class="btn-tiny">
+          <button class="btn-tiny btn-increase">
             <svg>
               <use href="img/icons.svg#icon-circle-with-plus"></use>
             </svg>
@@ -70,7 +51,7 @@ export const renderRecipe = recipe => {
       </div>
         <button class="recipe__love">
           <svg class="header__likes">
-            <use href="img/icons.svg#icon-heart-outlined"></use>
+            <use href="img/icons.svg#icon-heart${isLiked ? '' : '-outlined'}"></use>
           </svg>
         </button>
     </div>
@@ -79,7 +60,7 @@ export const renderRecipe = recipe => {
         ${recipe.ingredients.map(renderIngredient).join('')}
       </ul>
 
-      <button class="btn-small recipe__btn">
+      <button class="btn-small recipe__btn recipe__btn--add">
         <svg class="search__icon">
           <use href="img/icons.svg#icon-shopping-cart"></use>
         </svg>
@@ -103,6 +84,15 @@ export const renderRecipe = recipe => {
   `;
 
   DOMElements.recipe.insertAdjacentHTML('afterbegin', markup);
-}
+};
 
 export const clearRecipe = () => DOMElements.recipe.innerHTML = '';
+
+export const updateServingsIngredients = recipe => {
+  document.querySelector('.recipe__info-data--people').textContent = recipe.servings;
+
+  const countElements = Array.from(document.querySelectorAll('.recipe__count'));
+  countElements.forEach((countElement, index) =>
+    countElement.textContent = formatCount(recipe.ingredients[index].count)
+  )
+};

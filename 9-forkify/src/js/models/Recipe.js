@@ -18,13 +18,15 @@ export default class Recipe {
       this.img = image_url;
       this.url = source_url;
       this.ingredients = ingredients;
+      this.servings = 4;
 
       this.parseIngredients();
-      this.getServings();
       this.getTime();
     } catch (error) {
-      console.log(error);
-      throw new Error(get(error, 'response.data.error', 'Unknown error.'));
+      console.log(error.response);
+      const myError = new Error(get(error, 'response.data.error', 'Oops! There was an error. Sorry :C'));
+      myError.number = get(error, 'response.status', -1);
+      throw myError;
     }
   }
 
@@ -33,10 +35,6 @@ export default class Recipe {
     const numberOfIngredients = this.ingredients.length;
     const periods = Math.ceil(numberOfIngredients / 3);
     this.time = periods * 15;
-  }
-
-  getServings() {
-    this.servings = 4;
   }
 
   parseIngredients() {
@@ -94,5 +92,15 @@ export default class Recipe {
     });
 
     this.ingredients = newIngredients;
+  }
+
+  updateServings (type) {
+    const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+    this.ingredients.forEach(ingredient =>
+      ingredient.count *= newServings / this.servings
+    );
+
+    this.servings = newServings;
   }
 }

@@ -49,7 +49,8 @@ export const highlightedSelected = id => {
   Array.from(document.querySelectorAll('.results__link')).forEach(link => {
     link.classList.remove('results__link--active');
   });
-  document.querySelector(`a[href='#${id}']`).classList.add('results__link--active')
+  const link = document.querySelector(`a.results__link[href*='#${id}']`);
+  if (link) link.classList.add('results__link--active')
 };
 
 export const getInput = () => DOMElements.searchInput.value;

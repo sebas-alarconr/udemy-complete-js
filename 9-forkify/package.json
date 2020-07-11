@@ -24,8 +24,10 @@
     "axios": "^0.19.2",
     "core-js": "3",
     "dotenv": "^8.2.0",
-    "fractional": "^1.0.0",
+    "fraction.js": "^4.0.12",
     "lodash": "^4.17.19",
-    "regenerator-runtime": "^0.13.5"
+    "regenerator-runtime": "^0.13.5",
+    "toastify-js": "^1.8.0",
+    "uniqid": "^5.2.0"
   }
 }

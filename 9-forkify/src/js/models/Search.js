@@ -15,8 +15,10 @@ export default class Search {
 
       this.results = response.data.recipes;
     } catch (error) {
-      console.log(error);
-      throw new Error(get(error, 'response.data.error', 'Unknown error.'));
+      console.log(error.response);
+      const myError = new Error(get(error, 'response.data.error', 'Oops! There was an error. Sorry :C'));
+      myError.number = get(error, 'response.status', -1);
+      throw myError;
     }
   }
 }
