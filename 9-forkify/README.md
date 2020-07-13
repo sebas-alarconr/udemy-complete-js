@@ -52,6 +52,8 @@ Build a JS app to apply the concepts saw in Sections [7](../7-ES6/script.js) and
 
   `yarn install`
 
+- Create and `.env` file with the `API_URL` property
+
 - Run the app
 
   `npm start`
@@ -59,3 +61,4 @@ Build a JS app to apply the concepts saw in Sections [7](../7-ES6/script.js) and
   or
 
   `yarn start`
+  
