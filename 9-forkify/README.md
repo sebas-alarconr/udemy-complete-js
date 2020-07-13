@@ -40,3 +40,22 @@ Build a JS app to apply the concepts saw in Sections [7](../7-ES6/script.js) and
 - Renaming all views to avoid calling all of them 'View'.
 - Adding a 'Remove all' functionality for Shopping List.
 - Allowing the user to add manually an ingredient to the shopping list.
+
+
+## How to run
+- Node version used: 13.x.x and use your favorite package manager.
+- Install dependencies
+
+  `npm install`
+
+  or
+
+  `yarn install`
+
+- Run the app
+
+  `npm start`
+
+  or
+
+  `yarn start`
