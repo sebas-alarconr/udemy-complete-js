@@ -36,7 +36,7 @@ Build a JS app to apply the concepts saw in Sections [7](../7-ES6/script.js) and
   - limitString
   - formatCount
 
-- Using `loader` as a separate vie/component to make the app more modular.
+- Using `loader` as a separate view/component to make the app more modular.
 - Renaming all views to avoid calling all of them 'View'.
 - Adding a 'Remove all' functionality for Shopping List.
 - Allowing the user to add manually an ingredient to the shopping list.
