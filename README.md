@@ -6,6 +6,6 @@ You will find these sections with the final state of each exercise, splitted by 
 
 ## Sections with projects
 You will find the README file in each of these folders:
- - [Pig Game](4-DOM-pig-game/README.md)
- - [Budgety](6-budgety/README.md)
- - [Forkify](9-forkify/README.md)
+ - [Pig Game](4-DOM-pig-game/)
+ - [Budgety](6-budgety/)
+ - [Forkify](9-forkify/)
