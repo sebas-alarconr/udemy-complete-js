@@ -52,7 +52,11 @@ Build a JS app to apply the concepts saw in Sections [7](../7-ES6/script.js) and
 
   `yarn install`
 
-- Create a `.env` file with the `API_URL` property
+- Create a `.env` file with the `API_URL` property. The value is the API URL that is going to be used for the project, i.e.
+
+  ```
+  API_URL=https://forkify-api.herokuapp.com/api/
+  ```
 
 - Run the app
 
